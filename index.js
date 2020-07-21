@@ -12,7 +12,7 @@ client.on('ready', () => {
 
 // commands i guess
 client.on('message', msg => {
-  if (msg.content.indexOf('ping')) {
+  if (msg.content.includes('ping')) {
     msg.reply(' pong');
   }
 });
