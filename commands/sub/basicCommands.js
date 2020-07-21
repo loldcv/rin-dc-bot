@@ -1,19 +1,12 @@
 const { CommandGroup } = require('../commandGroup')
-const { getAllMethodNames } = require('../helpers');
+
 
 class BasicCommands extends CommandGroup {
 
-    help(msg, commandLoaderInstance) {
-        let desc_string = "";
+    help(msg, commandList) {
+        let desc_string = this.buildCommandTree(commandList);
 
-        Object.keys(commandLoaderInstance).forEach(commandType => {
-
-            if(commandType === "basicCommands") {
-                getAllMethodNames(commandLoaderInstance[commandType]).forEach(command => {
-                    desc_string += "rin " + command + "\n";
-                });
-            }
-        })
+        console.log(desc_string);
 
         const embed = new this.Discord.MessageEmbed()
             .setTitle('Available commands')
@@ -23,9 +16,31 @@ class BasicCommands extends CommandGroup {
         msg.channel.send(embed);
     }
 
+    buildCommandTree(obj, suffix = "") {
+        let desc_string = "";
+        Object.keys(obj).forEach(item => {
+            if (typeof obj[item] === 'function') {
+                desc_string += "rin " + suffix + item + "\n";
+            }
+        });
+
+        Object.keys(obj).forEach(item => {
+            if (typeof obj[item] === 'object') {
+                desc_string += this.buildCommandTree(obj[item], desc_string, item + " ")
+            }
+        })
+
+        return desc_string;
+    }
+
     ping(msg) {
         msg.reply(' Pong! (´∀｀)♡');
     }
+
+    iloveyou(msg) {
+        msg.reply(' I love you too \u{1F495}')
+    }
+
 }
 
 exports.BasicCommands = BasicCommands;

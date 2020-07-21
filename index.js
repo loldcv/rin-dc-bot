@@ -7,7 +7,8 @@ require('dotenv').config();
 client.login(process.env.TOKEN);
 
 // load commands
-const commands = new CommandLoader(Discord, client);
+const commandLoader = new CommandLoader(Discord, client);
+const commands = commandLoader.commandList;
 
 // hello message
 client.on('ready', () => {
@@ -16,9 +17,24 @@ client.on('ready', () => {
 
 // commands i guess
 client.on('message', msg => {
-  // only react to messages not sent by rin
-  if (msg.author.id !== client.user.id) {
-    if(msg.content.toLowerCase().startsWith('rin help')) commands.basicCommands.help(msg, commands);
-    if(msg.content.toLowerCase().startsWith('rin ping')) commands.basicCommands.ping(msg);
+  // only react to messages meant for rin
+  if(msg.content.toLowerCase().startsWith('rin')) {
+    // only react to messages not sent by rin
+    if (msg.author.id !== client.user.id) {
+      // turn string into array of strings
+      let exploded = msg.content.split(" ");
+      
+      let func = commands;
+      //navigate to function, skip "rin" in string array
+      for(let i = 1; i < exploded.length; i++) {
+        if(!!func[exploded[i]]) func = func[exploded[i]]
+      }
+
+      if (typeof func !== 'function') {
+        msg.reply(' This command does not exist.')
+      } else {
+        func(msg);
+      }
+    }
   }
 });
