@@ -1,44 +1,24 @@
 const { CommandGroup } = require('../commandGroup')
+const { buildHelpCommandString, mentionUser } = require('../../helpers');
 
 
 class BasicCommands extends CommandGroup {
 
     help(msg, commandList) {
-        let desc_string = this.buildCommandTree(commandList);
+        let desc_string = buildHelpCommandString(commandList);
 
-        console.log(desc_string);
-
-        const embed = new this.Discord.MessageEmbed()
-            .setTitle('Available commands')
-            .setColor(0xFFC0CB)
-            .setDescription(desc_string);
-        // Send the embed to the same channel as the message
-        msg.channel.send(embed);
-    }
-
-    buildCommandTree(obj, suffix = "") {
-        let desc_string = "";
-        Object.keys(obj).forEach(item => {
-            if (typeof obj[item] === 'function') {
-                desc_string += "rin " + suffix + item + "\n";
-            }
-        });
-
-        Object.keys(obj).forEach(item => {
-            if (typeof obj[item] === 'object') {
-                desc_string += this.buildCommandTree(obj[item], desc_string, item + " ")
-            }
-        })
-
-        return desc_string;
+        msg.channel.send(new this.Discord.MessageEmbed()
+        .setTitle('Available commands')
+        .setColor(0xFFC0CB)
+        .setDescription(desc_string));
     }
 
     ping(msg) {
-        msg.reply(' Pong! (´∀｀)♡');
+        msg.channel.send(mentionUser(msg) + ' Pong! (´∀｀)♡');
     }
 
     iloveyou(msg) {
-        msg.reply(' I love you too \u{1F495}')
+        msg.channel.send(mentionUser(msg) + ' I love you too \u{1F495}')
     }
 
 }

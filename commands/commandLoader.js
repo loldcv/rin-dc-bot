@@ -7,11 +7,9 @@ class CommandLoader {
         this.commandList = {
             'help': msg => this.basicCommands.help(msg, this.commandList),
             'ping': this.basicCommands.ping,
-            'one': {
-                'two': {
-                    'three': {
-                        'four': function() {}
-                    }
+            'i': {
+                'love': {
+                    'you': this.basicCommands.iloveyou
                 }
             }
         }
