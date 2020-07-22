@@ -18,7 +18,7 @@ class BasicCommands extends CommandGroup {
     }
 
     iloveyou(msg) {
-        msg.channel.send(mentionUser(msg) + ' I love you too \u{1F495}')
+        msg.channel.send(mentionUser(msg) + ' I love you too! \u{1F495}')
     }
 
     argstest(msg) {
