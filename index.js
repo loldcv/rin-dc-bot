@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const { CommandLoader } = require('./commands/commandLoader')
+const { mentionUser } = require('./helpers');
 require('dotenv').config();
 
 // log in as rin
@@ -22,7 +23,7 @@ client.on('message', msg => {
     // only react to messages not sent by rin
     if (msg.author.id !== client.user.id) {
       // turn string into array of strings
-      let exploded = msg.content.split(" ");
+      let exploded = msg.content.toLowerCase().split(" ");
       
       let func = commands;
       //navigate to function, skip "rin" in string array
@@ -36,7 +37,7 @@ client.on('message', msg => {
       }
 
       if (typeof func !== 'function') {
-        msg.reply(' This command does not exist.')
+        msg.channel.send(mentionUser(msg) + ' This command does not exist.')
       } else {
         func(msg);
       }
