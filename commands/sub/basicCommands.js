@@ -21,6 +21,10 @@ class BasicCommands extends CommandGroup {
         msg.channel.send(mentionUser(msg) + ' I love you too \u{1F495}')
     }
 
+    argstest(msg) {
+        msg.channel.send(mentionUser(msg) + ' You provided these arguments: ' + msg.rin_args)
+    }
+
 }
 
 exports.BasicCommands = BasicCommands;

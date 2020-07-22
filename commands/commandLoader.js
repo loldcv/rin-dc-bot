@@ -11,7 +11,8 @@ class CommandLoader {
                 'love': {
                     'you': this.basicCommands.iloveyou
                 }
-            }
+            },
+            'args': this.basicCommands.argstest,
         }
     }
 }
