@@ -31,11 +31,15 @@ class ServerCommands extends CommandGroup {
 
             //if we do have args, try to set server region
             if(msg.rin_args.length > 0) {
-                msg.guild.setRegion(msg.rin_args.split(' ')[0]).then(res => {
-                    msg.channel.send(mentionUser(msg) + " I changed the server region to " + msg.guild.region + " for you.")
-                }).catch(e => {
-                    msg.channel.send(mentionUser(msg) + " Sorry, looks like I failed to change the server region.")
-                })
+                if(r.has(msg.rin_args.split(' ')[0])) {
+                    msg.guild.setRegion(msg.rin_args.split(' ')[0]).then(res => {
+                        msg.channel.send(mentionUser(msg) + " I changed the server region to " + msg.guild.region + " for you.")
+                    }).catch(e => {
+                        msg.channel.send(mentionUser(msg) + " Sorry, looks like I failed to change the server region.")
+                    })
+                } else {
+                    msg.channel.send(mentionUser(msg) + " Sorry, but that is not a valid server region.")
+                }
             } else {
                 msg.channel.send(new this.Discord.MessageEmbed()
                 .setTitle('Which region do you want to change to?')
@@ -43,6 +47,8 @@ class ServerCommands extends CommandGroup {
                 .setDescription('Please provide the name of a valid voice region as an argument.\n_For example "rin server change region europe"_\n\nThe current server region is `' + msg.guild.region + '`.')
                 .addFields({ name: 'Available regions:', value: fieldString }));
             }
+        }).catch(e => {
+            msg.channel.send(mentionUser(msg) + " I was unable to retrieve any server regions.")
         });
     }
 
