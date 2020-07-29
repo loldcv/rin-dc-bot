@@ -19,9 +19,14 @@ class ServerCommands extends CommandGroup {
             let regions = r.keys();
             let current_region = msg.guild.region;
 
+            let counter = 0;
             for (let item of regions) {
-                if (item === current_region) fieldString += "**[" + item + "]**" + " \u{2B05}\n"
-                else fieldString += item + " \n"
+                if (counter === 5) {
+                    fieldString += "\n";
+                    counter = 0;
+                }
+                else fieldString += "`" + item + "`" + " ";
+                counter++;
             }
 
             //if we do have args, try to set server region
@@ -35,7 +40,7 @@ class ServerCommands extends CommandGroup {
                 msg.channel.send(new this.Discord.MessageEmbed()
                 .setTitle('Which region do you want to change to?')
                 .setColor(0xFFC0CB)
-                .setDescription('Please provide the name of a valid voice region as an argument.\n(For example "rin server change region europe")\n\nThe current server region is marked.')
+                .setDescription('Please provide the name of a valid voice region as an argument.\n_For example "rin server change region europe"_\n\nThe current server region is `' + msg.guild.region + '`.')
                 .addFields({ name: 'Available regions:', value: fieldString }));
             }
         });
