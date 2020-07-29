@@ -8,16 +8,16 @@ class CommandLoader {
     
         this.commandList = {
             'help': msg => this.basicCommands.help(msg, this.commandList),
-            'ping': msg => this.basicCommands.ping,
+            'ping': msg => this.basicCommands.ping(msg),
             'server': {
                 'change': {
                     'region': msg => this.serverCommands.changeServerRegion(msg),
                 }
             },
-            'args': msg => this.basicCommands.argstest,
+            'args': msg => this.basicCommands.argstest(msg),
             'i': {
                 'love': {
-                    'you': msg => this.basicCommands.iloveyou
+                    'you': msg => this.basicCommands.iloveyou(msg)
                 }
             },
         }
