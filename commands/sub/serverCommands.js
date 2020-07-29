@@ -21,7 +21,7 @@ class ServerCommands extends CommandGroup {
         }
 
         msg.guild.fetchVoiceRegions().then(r => {
-            let regions = r.keys();
+            const regions = r.keys();
             let current_region = msg.guild.region;
 
             let counter = 0;
