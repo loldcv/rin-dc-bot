@@ -8,6 +8,8 @@ const { mentionUser } = require('../../helpers');
 class ServerCommands extends CommandGroup {
 
     /**
+     * If args are provided: Attempt to change server region
+     * If no args provided: Display instructions and available regions to change to
      * @param {Discord.Message} msg
      */
     changeServerRegion(msg) {
