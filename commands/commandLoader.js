@@ -1,18 +1,25 @@
 const { BasicCommands } = require('./sub/basicCommands')
+const { ServerCommands } = require('./sub/serverCommands')
 
 class CommandLoader {
     constructor(Discord, client) {
         this.basicCommands = new BasicCommands(Discord, client);
+        this.serverCommands = new ServerCommands(Discord, client);
     
         this.commandList = {
             'help': msg => this.basicCommands.help(msg, this.commandList),
-            'ping': this.basicCommands.ping,
-            'i': {
-                'love': {
-                    'you': this.basicCommands.iloveyou
+            'ping': msg => this.basicCommands.ping,
+            'server': {
+                'change': {
+                    'region': msg => this.serverCommands.changeServerRegion(msg),
                 }
             },
-            'args': this.basicCommands.argstest,
+            'args': msg => this.basicCommands.argstest,
+            'i': {
+                'love': {
+                    'you': msg => this.basicCommands.iloveyou
+                }
+            },
         }
     }
 }

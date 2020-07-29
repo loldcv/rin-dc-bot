@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "off": "heroku ps:scale worker=0",
     "on": "heroku ps:scale worker=1"
-
   },
   "keywords": [
     "discord",
