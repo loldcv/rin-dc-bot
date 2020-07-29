@@ -15,6 +15,11 @@ class ServerCommands extends CommandGroup {
     changeServerRegion(msg) {
         let fieldString = "";
 
+        if(!msg.guild) {
+            msg.channel.send(mentionUser(msg) + " That command doesn't work here.")
+            return;
+        }
+
         msg.guild.fetchVoiceRegions().then(r => {
             let regions = r.keys();
             let current_region = msg.guild.region;
