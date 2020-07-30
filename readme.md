@@ -6,6 +6,10 @@
 
 NodeJS
 
+## Recommendations
+
+This project was written using Visual Studio Code.
+
 ## Installation
 
 1) Make a copy of the .env.example file and name it ".env"
