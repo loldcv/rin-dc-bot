@@ -17,6 +17,11 @@
   ],
   "author": "dcv",
   "license": "MIT",
+  "nodemonConfig": {
+    "ignore": [
+        "node_modules/*"
+    ]
+},
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0"
