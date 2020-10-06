@@ -8,7 +8,6 @@ const { mentionUser } = require('../../helpers');
 class UserCommands extends CommandGroup {
 
     /**
-     * 
      * @param {Discord.Message} msg 
      */
     showAvatar(msg) {
