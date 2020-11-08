@@ -1,4 +1,4 @@
-const { CommandGroup } = require('../commandGroup')
+const { CommandGroup } = require('../commandGroup');
 const { buildHelpCommandString, mentionUser } = require('../../helpers');
 
 /**
@@ -14,12 +14,12 @@ class BasicCommands extends CommandGroup {
      * @param {Object} commandList 
      */
     help(msg, commandList) {
-        let desc_string = buildHelpCommandString(commandList);
+        let desc_string = buildHelpCommandString(commandList) + "\nAvailable colours: https://discord.js.org/#/docs/main/stable/typedef/ColorResolvable";
 
         msg.channel.send(new this.Discord.MessageEmbed()
-        .setTitle('Available commands')
-        .setColor(0xFFC0CB)
-        .setDescription(desc_string));
+            .setTitle('Available commands')
+            .setColor(0xFFC0CB)
+            .setDescription(desc_string));
     }
 
     /**
@@ -35,7 +35,7 @@ class BasicCommands extends CommandGroup {
      * @param {Discord.Message} msg 
      */
     iloveyou(msg) {
-        msg.channel.send(mentionUser(msg) + ' I love you too! \u{1F495}')
+        msg.channel.send(mentionUser(msg) + ' I love you too! \u{1F495}');
     }
 
     /**
@@ -43,7 +43,7 @@ class BasicCommands extends CommandGroup {
      * @param {Discord.Message} msg 
      */
     argstest(msg) {
-        msg.channel.send(mentionUser(msg) + ' You provided these arguments: ' + msg.rin_args)
+        msg.channel.send(mentionUser(msg) + ' You provided these arguments: ' + msg.rin_args);
     }
 
 }
