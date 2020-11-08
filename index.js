@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { CommandLoader } = require('./commands/commandLoader')
+const { CommandLoader } = require('./commands/commandLoader');
 const { mentionUser } = require('./helpers');
 require('dotenv').config();
 
@@ -29,12 +29,12 @@ client.on('message', msg => {
   let func = commands;
   for (let i = 1; i < exploded.length; i++) {
 
-    if (!!func[exploded[i]]) func = func[exploded[i]]
+    if (!!func[exploded[i]]) func = func[exploded[i]];
 
     if (typeof func === 'function') {
-      
+
       //attach user args as var to message
-      msg.rin_args = msg.content.slice(msg.content.indexOf(exploded[i]) + exploded[i].length + 1)
+      msg.rin_args = msg.content.slice(msg.content.indexOf(exploded[i]) + exploded[i].length + 1);
 
       func(msg);
       return;
